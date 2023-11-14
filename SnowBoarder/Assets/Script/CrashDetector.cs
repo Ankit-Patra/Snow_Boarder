@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    [SerializeField] ParticleSystem crashEffect;
     void OnTriggerEnter2D(Collider2D other)
     {
        if(other.tag == "Ground")
        {
-            Debug.Log("You Died!");
+            crashEffect.Play();
+            Invoke("ReLoadScean",.5f);
        }
+    }
+    void ReLoadScean()
+    {
+        SceneManager.LoadScene(0);
     }
 }
